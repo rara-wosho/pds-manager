@@ -1,7 +1,3 @@
-# Personal Data Sheet Manager with React JS and Supabase
-
-This project is an activity for System Integration highlighting topics about relational database and performing CRUD operations
-
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
