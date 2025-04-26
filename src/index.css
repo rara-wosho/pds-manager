@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+    --bg-body: #f0f8ff;
+    --primary-gradient: linear-gradient(
+        to top,
+        rgb(137, 26, 216),
+        rgb(219, 181, 255)
+    );
+    --text-gradient: linear-gradient(
+        to right,
+        rgb(137, 26, 216),
+        rgb(49, 39, 62)
+    );
+}
+
+* {
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background-color: var(--bg-body) !important;
+    overflow-y: scroll;
+    width: 100%;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+/* SIGN IN PAGE  */
+.signin-page,
+.signin-wrapper {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+.signin-page .icon-wrapper {
+    position: absolute;
+    top: -2.4rem;
+}
+
+.gradient-text {
+    display: inline-block;
+    background: var(--text-gradient);
+    color: transparent;
+    background-clip: text;
+}
+
+input.form-control {
+    font-size: 0.9rem;
+    padding-block: 8px;
+    background-color: rgb(248, 248, 248);
+}
+input.form-control::placeholder {
+    color: rgba(128, 128, 128, 0.5);
+}
+
+/* PROFILE  */
+.profile-header {
+    background: linear-gradient(to bottom, rgb(137, 26, 216), transparent);
+    /* opacity: 0.3; */
+    position: relative;
+    height: 260px;
+    overflow: hidden;
+}
+
+.profile-header::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.3) 1px,
+            transparent 1px
+        ),
+        linear-gradient(rgba(255, 255, 255, 0.3) 1px, transparent 1px);
+    background-size: 30px 30px;
+    pointer-events: none; /* Allow clicking through the pattern layer */
+}
+
+.profile-body,
+.profile-edit-section {
+    transform: translateY(-10rem);
+}
+
+.profile-pic-container {
+    border: 4px solid rgb(83, 197, 83);
+}
+.profile-pic-container img {
+    object-fit: cover;
+    aspect-ratio: 5/5;
+}
+
+.check-badge {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.edit-section-cover {
+    position: absolute;
+    left: 0;
+    top: 5.1rem;
+    height: 100%;
+    width: 100%;
+}
+
+/* UTILITY CLASSES  */
+.cursor {
+    cursor: pointer;
+}
+.rounded-4 {
+    border-radius: 24px;
+}
+.fs-7 {
+    font-size: 0.8rem;
+}
+.primary-gradient {
+    background: var(--primary-gradient);
+}
+
+.min-h-100 {
+    min-height: 100vh;
+}
+
+.center {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.bg-none {
+    background: transparent !important;
+}
+
+@media only screen and (min-width: 576px) {
+    .signin-page {
+        background-color: transparent;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .profile-header {
+        border-radius: 18px;
+    }
+}
