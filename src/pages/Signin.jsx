@@ -1,18 +1,47 @@
 import GradientText from "../components/ui/GradientText";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SiGoogletagmanager } from "react-icons/si";
 import { useAuth } from "../context/AuthContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import InputField from "../components/ui/InputField";
 
 function Signin() {
-    const { signIn } = useAuth();
+    const navigate = useNavigate();
+    const { user, signInUser } = useAuth();
+    const [loading, setLoading] = useState(false);
 
     const [formData, setFormData] = useState({ email: "", password: "" });
+    const [errorMessage, setErrorMessage] = useState("");
+
+    useEffect(() => {
+        if (user) {
+            navigate("/home");
+        }
+    }, [user, navigate]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleSignIn = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+
+        const { data, error } = await signInUser(
+            formData.email,
+            formData.password
+        );
+
+        if (error) {
+            console.error("error while signin in", error.message);
+            setErrorMessage(error.message);
+        } else {
+            console.log("success signing in", data);
+            navigate("/profile");
+        }
+
+        setLoading(false);
     };
 
     return (
@@ -29,7 +58,17 @@ function Signin() {
                     Manage Personal Data with Ease.
                 </small>
 
-                <form style={{ width: 350 }} action="" className="mt-4 ">
+                <form
+                    onSubmit={handleSignIn}
+                    style={{ width: 350 }}
+                    action=""
+                    className="mt-4 "
+                >
+                    {errorMessage && (
+                        <div className="alert py-2 alert-danger">
+                            <small className="fs-7">{errorMessage}</small>
+                        </div>
+                    )}
                     <div className="mb-3">
                         <label
                             htmlFor="exampleFormControlInput1"
@@ -79,13 +118,21 @@ function Signin() {
                     </div>
 
                     <button
-                        onClick={signIn}
                         disabled={
-                            formData.email == "" || formData.password == ""
+                            formData.email == "" ||
+                            formData.password == "" ||
+                            loading
                         }
                         className="btn mt-3 w-100 primary-gradient text-light fw-bold"
                     >
-                        Login
+                        {loading ? (
+                            <div
+                                class="spinner-border spinner-border-sm"
+                                role="status"
+                            ></div>
+                        ) : (
+                            "Sign In"
+                        )}
                     </button>
 
                     <p className="mb-0 py-2 text-secondary text-center">OR</p>

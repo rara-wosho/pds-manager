@@ -3,7 +3,7 @@
 :root {
     --bg-body: #f0f8ff;
     --primary-gradient: linear-gradient(
-        to top,
+        340deg,
         rgb(137, 26, 216),
         rgb(219, 181, 255)
     );
@@ -12,6 +12,8 @@
         rgb(137, 26, 216),
         rgb(49, 39, 62)
     );
+
+    --clr-primary: rgb(179, 38, 255);
 }
 
 * {
@@ -48,8 +50,13 @@ a {
 input.form-control {
     font-size: 0.9rem;
     padding-block: 8px;
-    background-color: rgb(248, 248, 248);
+    /* background-color: rgb(248, 248, 248); */
 }
+
+.form-label {
+    font-size: 0.8rem;
+}
+
 input.form-control::placeholder {
     color: rgba(128, 128, 128, 0.5);
 }
@@ -105,7 +112,52 @@ input.form-control::placeholder {
     width: 100%;
 }
 
+/* PROFILE CARD  */
+
+.profile-card-img {
+    border: 3px solid rgba(147, 14, 195, 0.3);
+    transition: all 0.3s;
+}
+
+.profile-card:hover .profile-card-img {
+    border-color: rgb(216, 99, 255);
+    transform: scale(108%);
+}
+
+.profile-card .btns {
+    background-color: rgba(93, 54, 109, 0.02);
+}
+.profile-card .btn:hover {
+    color: var(--clr-primary) !important;
+}
+
+.profile-status-bar {
+    background-color: rgba(199, 173, 207, 0.407);
+}
+.profile-status-bar .bar {
+    width: 50%;
+    opacity: 0.7;
+    height: 10px;
+    background-color: var(--clr-primary);
+}
+
+.course-tab {
+    overflow-x: scroll;
+}
+
+.course-tab::-webkit-scrollbar {
+    display: none;
+}
 /* UTILITY CLASSES  */
+
+.txt-primary {
+    color: var(--clr-primary) !important;
+}
+
+.btn-primary {
+    background: var(--primary-gradient) !important;
+    border: none !important;
+}
 .cursor {
     cursor: pointer;
 }

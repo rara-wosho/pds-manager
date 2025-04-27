@@ -2,10 +2,13 @@ import { useState } from "react";
 import { BsPatchCheckFill } from "react-icons/bs";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { HiSwitchHorizontal } from "react-icons/hi";
-import { SiGoogletagmanager } from "react-icons/si";
 import { MdOutlineContentCopy } from "react-icons/md";
 
+import { useAuth } from "../context/AuthContext";
+
 function Home() {
+    const { user, signOutUser } = useAuth();
+    console.log("This is the user data: ", user?.user_metadata.email);
     const [readOnly, setReadOnly] = useState(true);
 
     return (
@@ -19,8 +22,11 @@ function Home() {
                     <div className="p-2 cursor center rounded-circle bg-light">
                         <IoMdArrowRoundBack size={20} />
                     </div>
-                    <div className="active-badge fs-7 rounded-pill center bg-light px-4">
-                        Active
+                    <div
+                        onClick={signOutUser}
+                        className="active-badge fs-7 rounded-pill center bg-light px-4"
+                    >
+                        logout
                     </div>
                     <div className="d-flex align-items-center">
                         <div className="p-2 cursor center rounded-circle bg-light">
@@ -51,7 +57,7 @@ function Home() {
                     </div>
                 </div>
                 <p className="text-secondary mb-2 text-center">
-                    raeldevprojects@gmail.com
+                    {user?.user_metadata.email ?? "not set"}
                 </p>
                 <h1 className="text-muted text-center fw-bold">
                     Israel P. De Vera
@@ -94,26 +100,39 @@ function Home() {
                 </div>
                 <div className="row row-cols-1 row-cols-md-2 px-2">
                     <div className="col px-1">
-                        <div class="mb-3">
-                            <label for="firstname" class="form-label">
+                        <div className="mb-3">
+                            <label htmlFor="firstname" className="form-label">
                                 First Name
                             </label>
                             <input
                                 type="email"
-                                class="form-control bg-none"
+                                className="form-control bg-none"
                                 id="firstname"
                                 placeholder="name@example.com"
                             />
                         </div>
                     </div>
                     <div className="col px-1">
-                        <div class="mb-3">
-                            <label for="lastname" class="form-label">
+                        <div className="mb-3">
+                            <label htmlFor="lastname" className="form-label">
                                 Last Name
                             </label>
                             <input
                                 type="email"
-                                class="form-control bg-none"
+                                className="form-control bg-none"
+                                id="lastname"
+                                placeholder="name@example.com"
+                            />
+                        </div>
+                    </div>
+                    <div className="col px-1">
+                        <div className="mb-3">
+                            <label htmlFor="lastname" className="form-label">
+                                Email
+                            </label>
+                            <input
+                                type="email"
+                                className="form-control bg-none"
                                 id="lastname"
                                 placeholder="name@example.com"
                             />

@@ -8,6 +8,7 @@ function InputField({
     required,
     value,
     onChange,
+    disabled,
 }) {
     const [showPassword, setShowPassword] = useState(false);
 
@@ -22,12 +23,13 @@ function InputField({
         <div className="center position-relative">
             <input
                 type={getInputType()}
-                className="form-control w-100 border-0"
+                className="form-control w-100"
                 placeholder={placeholder}
                 required={required}
                 value={value}
                 onChange={onChange}
                 name={name}
+                disabled={disabled}
             />
             {type === "password" && (
                 <div
