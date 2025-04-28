@@ -15,7 +15,7 @@ function AllRoutes() {
 
             <Route element={<ProtectedRoutes />}>
                 <Route path="home" element={<Home />} />
-                <Route path="profile" element={<Profile />} />
+                <Route path="profile/:id" element={<Profile />} />
                 <Route path="account-setup" element={<FinishAccount />} />
             </Route>
         </Routes>

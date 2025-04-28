@@ -2,8 +2,13 @@ import { useUsers } from "../hooks/useUsers";
 import ProfileCard from "../components/ProfileCard";
 import Navbar from "../components/Navbar";
 import DashboardOverview from "../components/DashboardOverview";
+import CourseTab from "../components/CourseTab";
+
+import { useState } from "react";
 
 function Home() {
+    const [courseFilter, setCourseFilter] = useState("all");
+
     const {
         data: users,
         isLoading,
@@ -11,7 +16,7 @@ function Home() {
         isPending,
         isError,
         error,
-    } = useUsers();
+    } = useUsers(courseFilter);
 
     console.log("User data: ", users);
 
@@ -35,26 +40,10 @@ function Home() {
                 <DashboardOverview />
                 <div className="row">
                     <div className="col col-12 col-md-5 mb-3 d-flex align-items-center">
-                        <div
-                            style={{ gap: 8 }}
-                            className="d-flex align-items-center w-100 course-tab pe-2"
-                        >
-                            <div className="px-3 btn-sm flex-shrink-0 fs-7 btn btn-secondary text-white">
-                                ALL
-                            </div>
-                            <div className="px-3 btn-sm flex-shrink-0 fs-7 btn btn-outline-secondary">
-                                BSIT
-                            </div>
-                            <div className="px-3 btn-sm flex-shrink-0 fs-7 btn btn-outline-secondary">
-                                BTLE IA
-                            </div>
-                            <div className="px-3 btn-sm flex-shrink-0 fs-7 btn btn-outline-secondary">
-                                BTLE HE
-                            </div>
-                            <div className="px-3 btn-sm flex-shrink-0 fs-7 btn btn-outline-secondary">
-                                BSMB
-                            </div>
-                        </div>
+                        <CourseTab
+                            courseFilter={courseFilter}
+                            setCourseFilter={setCourseFilter}
+                        />
                     </div>
                     <div className="col col-12 col-md-7 d-flex align-items-center mb-3">
                         <input
@@ -70,15 +59,24 @@ function Home() {
                         </button>
                     </div>
                 </div>
-                <div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 px-1">
-                    {users.map((user) => {
-                        return (
-                            <div className="col px-1 px-md-2 mb-2 mb-md-3">
-                                <ProfileCard user={user} />
-                            </div>
-                        );
-                    })}
-                </div>
+                {isLoading ? (
+                    <div className="p-5 center">
+                        <div className="spinner-border" role="status"></div>
+                    </div>
+                ) : (
+                    <div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 px-1">
+                        {users?.map((user) => {
+                            return (
+                                <div
+                                    key={user.user_id}
+                                    className="col px-1 px-md-2 mb-2 mb-md-3"
+                                >
+                                    <ProfileCard user={user} />
+                                </div>
+                            );
+                        })}
+                    </div>
+                )}
             </div>
         </div>
     );

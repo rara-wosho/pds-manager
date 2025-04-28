@@ -14,6 +14,8 @@
     );
 
     --clr-primary: rgb(179, 38, 255);
+
+    --accent: green;
 }
 
 * {
@@ -150,6 +152,9 @@ input.form-control::placeholder {
 }
 /* UTILITY CLASSES  */
 
+.text-accent {
+    color: var(--accent) !important;
+}
 .txt-primary {
     color: var(--clr-primary) !important;
 }

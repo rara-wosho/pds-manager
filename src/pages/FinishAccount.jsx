@@ -1,17 +1,16 @@
 import { useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import InputField from "../components/ui/InputField";
 import { useAuth } from "../context/AuthContext";
-
 import { supabase } from "../supabase-client";
 import { useNavigate } from "react-router-dom";
 
 function FinishAccount() {
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
     const { user } = useAuth();
     const [loading, setLoading] = useState(false);
-    console.log(user.id);
 
-    // Create form state
     const [formData, setFormData] = useState({
         user_id: user?.id,
         email: user?.email,
@@ -29,31 +28,34 @@ function FinishAccount() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        console.log(name);
-        console.log(value);
         setFormData((prev) => ({
             ...prev,
             [name]: value,
         }));
-        console.log(formData);
     };
 
-    const handleSubmit = async (e) => {
+    const { mutate: addUser } = useMutation({
+        mutationFn: async (newUser) => {
+            const { error } = await supabase.from("users").insert([newUser]);
+            if (error) throw new Error(error.message);
+        },
+        onSuccess: () => {
+            // ✅ Invalidate and refetch 'users' query
+            queryClient.invalidateQueries({ queryKey: ["users"] });
+            navigate("/home");
+        },
+        onError: (error) => {
+            console.error("Insert error:", error.message);
+            alert("Failed to create user. Please try again.");
+        },
+    });
+
+    const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
-        console.log("Submitted formData:", formData);
-
-        // You can now send `formData` to your backend or Supabase if you want
-        const { error } = await supabase
-            .from("users")
-            .insert([{ ...formData }]);
-
-        if (error) {
-            console.log("error: ", error.message);
-        } else {
-            navigate("/home");
-        }
-        setLoading(false);
+        addUser(formData, {
+            onSettled: () => setLoading(false),
+        });
     };
 
     return (
@@ -61,6 +63,7 @@ function FinishAccount() {
             style={{ paddingTop: "4rem" }}
             className="min-h-100 center flex-column pb-5"
         >
+            {/* HEADER */}
             <div
                 className="header w-100 bg-white py-3 center position-absolute"
                 style={{ top: 0 }}
@@ -177,12 +180,19 @@ function FinishAccount() {
                 <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 px-2">
                     <div className="col px-2 mb-2">
                         <label className="form-label text-muted">Course</label>
-                        <InputField
+                        <select
                             name="course"
                             value={formData.course}
                             onChange={handleChange}
-                            placeholder="e.g., BSIT"
-                        />
+                            className="form-select"
+                            aria-label="Select Gender"
+                        >
+                            <option value="">Select Course</option>
+                            <option value="bsit">BSIT</option>
+                            <option value="btle ia">BTLE IA</option>
+                            <option value="btle he">BTLE HE</option>
+                            <option value="bsmb">BSMB</option>
+                        </select>
                     </div>
                     <div className="col px-2 mb-2">
                         <label className="form-label text-muted">

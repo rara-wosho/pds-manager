@@ -3,14 +3,30 @@ import { BsPatchCheckFill } from "react-icons/bs";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { HiSwitchHorizontal } from "react-icons/hi";
 import { MdOutlineContentCopy } from "react-icons/md";
+import { FiLogOut } from "react-icons/fi";
 
 import { useAuth } from "../context/AuthContext";
+import { useNavigate, useParams } from "react-router-dom";
+import { supabase } from "../supabase-client";
+import { useUsers } from "../hooks/useUsers";
 
 function Home() {
     const { user, signOutUser } = useAuth();
-    console.log("This is the user data: ", user?.user_metadata.email);
     const [readOnly, setReadOnly] = useState(true);
 
+    const { id } = useParams();
+    const navigate = useNavigate();
+
+    const { data: users, isLoading } = useUsers(); // all users already fetched
+
+    const userProfile = users?.find((user) => user.user_id === id);
+
+    if (isLoading)
+        return (
+            <div className="center p-5">
+                <div className="spinner-border" role="status"></div>
+            </div>
+        );
     return (
         <div
             style={{ maxWidth: 900 }}
@@ -19,25 +35,18 @@ function Home() {
             {/* header  */}
             <div className="profile-header w-100">
                 <div className="d-flex justify-content-between p-3">
-                    <div className="p-2 cursor center rounded-circle bg-light">
+                    <div
+                        onClick={() => navigate(-1)}
+                        className="p-2 cursor shadow center rounded-circle bg-light"
+                    >
                         <IoMdArrowRoundBack size={20} />
                     </div>
                     <div
+                        style={{ zIndex: 10 }}
                         onClick={signOutUser}
-                        className="active-badge fs-7 rounded-pill center bg-light px-4"
+                        className="btn shadow btn-danger fs-7 rounded-pill center px-4"
                     >
-                        logout
-                    </div>
-                    <div className="d-flex align-items-center">
-                        <div className="p-2 cursor center rounded-circle bg-light">
-                            <HiSwitchHorizontal size={20} />
-                        </div>
-                        {/* <div className="p-2 ms-2 cursor center rounded-circle bg-light">
-                            <FaHeart size={18} />
-                        </div>
-                        <div className="p-2 ms-2 cursor center rounded-circle bg-light">
-                            <SlOptions size={18} />
-                        </div> */}
+                        <FiLogOut /> logout
                     </div>
                 </div>
             </div>
@@ -46,7 +55,11 @@ function Home() {
             <div className="w-100 position-relative d-flex flex-column align-items-center profile-body px-3">
                 <div className="profile-pic-container mb-4 rounded-circle p-2 center position-relative">
                     <img
-                        src="https://i.pinimg.com/736x/f8/0d/22/f80d22e1a337e1e7cd745c12a2b3426b.jpg"
+                        src={
+                            userProfile.image_path
+                                ? userProfile.image_path
+                                : "/images/default-img.jpg"
+                        }
                         className="rounded-circle"
                         width={180}
                         height={180}
@@ -57,16 +70,20 @@ function Home() {
                     </div>
                 </div>
                 <p className="text-secondary mb-2 text-center">
-                    {user?.user_metadata.email ?? "not set"}
+                    {userProfile.email ?? "email not set"}
                 </p>
                 <h1 className="text-muted text-center fw-bold">
-                    Israel P. De Vera
+                    {userProfile?.first_name} {userProfile?.middle_name}{" "}
+                    {userProfile?.last_name}
                 </h1>
-                <i className="fs-4 text-muted mb-2 text-center">
-                    Editorial Cartoonist
-                </i>
+                {userProfile.position && (
+                    <i className="fs-4 text-muted mb-2 text-center">
+                        {userProfile.position}
+                    </i>
+                )}
+
                 <p className="mb-0 text-secondary text-center">
-                    Macabayao, Jimenez Misamis Occidental
+                    {userProfile.address && userProfile.address}
                 </p>
 
                 <div

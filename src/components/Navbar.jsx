@@ -1,4 +1,6 @@
 import { SiGoogletagmanager } from "react-icons/si";
+import { FiLogOut } from "react-icons/fi";
+
 import { useAuth } from "../context/AuthContext";
 
 function Navbar() {
@@ -33,9 +35,12 @@ function Navbar() {
 
                     <div
                         onClick={signOutUser}
-                        className="btn btn-sm ms-3 fw-semibold btn-outline-danger d-none d-md-inline-block"
+                        className="btn btn-sm ms-3 fw-semibold btn-outline-danger"
                     >
-                        Log Out
+                        <FiLogOut />
+                        <p className="mb-0 ms-1 d-none d-md-inline-block">
+                            Log Out
+                        </p>
                     </div>
                 </div>
             </div>
