@@ -25,25 +25,23 @@ function Profile() {
         queryFn: () => getUserById(id),
     });
 
-    if (!user)
-        return (
-            <div className="container min-h-100 center">
-                <div className="alert alert-danger">
-                    We cannot find this user. This is maybe because they deleted
-                    their account.
-                </div>
-            </div>
-        );
     if (isError) console.log("error fetching user from profile", error);
 
     if (isLoading)
         return (
-            <div className="center p-5">
+            <div className="center min-h-100 p-5">
                 <div className="spinner-border" role="status"></div>
             </div>
         );
 
-    return (
+    return !user ? (
+        <div className="container min-h-100 center">
+            <div className="alert alert-danger">
+                We cannot find this user. This is maybe because they deleted
+                their account or this user id doesn't exit.
+            </div>
+        </div>
+    ) : (
         <div
             style={{ maxWidth: 1100 }}
             className="profile-page d-flex w-100 flex-column min-h-100 p-0 p-md-4 mx-auto"
@@ -79,8 +77,8 @@ function Profile() {
                                 : "/images/default-img.jpg"
                         }
                         className="rounded-circle"
-                        width={180}
-                        height={180}
+                        width={165}
+                        height={165}
                         alt=""
                     />
                     <div className="check-badge">
