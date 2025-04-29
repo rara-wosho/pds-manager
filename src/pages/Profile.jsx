@@ -1,19 +1,16 @@
 import { useState } from "react";
 import { BsPatchCheckFill } from "react-icons/bs";
-import { IoMdArrowRoundBack } from "react-icons/io";
-import { HiSwitchHorizontal } from "react-icons/hi";
-import { MdOutlineContentCopy } from "react-icons/md";
+
 import { FiLogOut } from "react-icons/fi";
+import { FiHome } from "react-icons/fi";
 
 import { useAuth } from "../context/AuthContext";
 import { useNavigate, useParams } from "react-router-dom";
-import { supabase } from "../supabase-client";
 import { useUsers } from "../hooks/useUsers";
 import DatasheetForm from "../components/DatasheetForm";
 
 function Home() {
   const { user, signOutUser } = useAuth();
-  const [readOnly, setReadOnly] = useState(true);
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -30,8 +27,8 @@ function Home() {
     );
   return (
     <div
-      style={{ maxWidth: 900 }}
-      className="profile-page d-flex flex-column align-items-center justify-content-start min-h-100 p-0 p-md-4 mx-auto"
+      style={{ maxWidth: 1100 }}
+      className="profile-page d-flex w-100 flex-column min-h-100 p-0 p-md-4 mx-auto"
     >
       {/* header  */}
       <div className="profile-header w-100">
@@ -40,7 +37,7 @@ function Home() {
             onClick={() => navigate(-1)}
             className="p-2 cursor shadow center rounded-circle bg-light"
           >
-            <IoMdArrowRoundBack size={20} />
+            <FiHome size={20} />
           </div>
           <div
             style={{ zIndex: 10 }}
@@ -87,16 +84,7 @@ function Home() {
           {userProfile.address && userProfile.address}
         </p>
 
-        <div style={{ gap: 8 }} className="d-flex align-items-center py-4">
-          <button className="btn btn-success px-2 px-md-4">Update Infos</button>
-          <button className="btn btn-outline-danger px-2 px-md-4">
-            Delete Account
-          </button>
-          <button className="btn btn-outline-secondary">
-            <MdOutlineContentCopy size={18} />
-          </button>
-        </div>
-        <div className="border-bottom w-100 mt-3"></div>
+        {/* <div className="border-bottom w-100 mt-3"></div> */}
       </div>
 
       <DatasheetForm />

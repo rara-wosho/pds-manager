@@ -1,202 +1,208 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 :root {
-    --bg-body: #f0f8ff;
-    --primary-gradient: linear-gradient(
-        340deg,
-        rgb(137, 26, 216),
-        rgb(219, 181, 255)
-    );
-    --text-gradient: linear-gradient(
-        to right,
-        rgb(137, 26, 216),
-        rgb(49, 39, 62)
-    );
+  --bg-body: #f0f8ff;
+  --primary-gradient: linear-gradient(
+    340deg,
+    rgb(137, 26, 216),
+    rgb(219, 181, 255)
+  );
+  --text-gradient: linear-gradient(
+    to right,
+    rgb(137, 26, 216),
+    rgb(49, 39, 62)
+  );
 
-    --clr-primary: rgb(179, 38, 255);
+  --clr-primary: rgb(179, 38, 255);
 
-    --accent: green;
+  --accent: green;
 }
 
 * {
-    font-family: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
-    background-color: var(--bg-body) !important;
-    overflow-y: scroll;
-    width: 100%;
+  background-color: var(--bg-body) !important;
+  overflow-y: scroll;
+  width: 100%;
 }
 
 a {
-    text-decoration: none !important;
+  text-decoration: none !important;
 }
 
 /* SIGN IN PAGE  */
 .signin-page,
 .signin-wrapper {
-    background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 .signin-page .icon-wrapper {
-    position: absolute;
-    top: -2.4rem;
+  position: absolute;
+  top: -2.4rem;
 }
 
 .gradient-text {
-    display: inline-block;
-    background: var(--text-gradient);
-    color: transparent;
-    background-clip: text;
+  display: inline-block;
+  background: var(--text-gradient);
+  color: transparent;
+  background-clip: text;
 }
 
 input.form-control {
-    font-size: 0.9rem;
-    padding-block: 8px;
-    /* background-color: rgb(248, 248, 248); */
+  font-size: 0.9rem;
+  padding-block: 8px;
+  /* background-color: rgb(248, 248, 248); */
 }
 
 .form-label {
-    font-size: 0.8rem;
+  font-size: 0.8rem;
 }
 
 input.form-control::placeholder {
-    color: rgba(128, 128, 128, 0.5);
+  color: rgba(128, 128, 128, 0.5);
 }
 
 /* PROFILE  */
 .profile-header {
-    background: linear-gradient(to bottom, rgb(137, 26, 216), transparent);
-    /* opacity: 0.3; */
-    position: relative;
-    height: 260px;
-    overflow: hidden;
+  background: linear-gradient(to bottom, rgb(137, 26, 216), transparent);
+  /* opacity: 0.3; */
+  position: relative;
+  height: 260px;
+  overflow: hidden;
 }
 
 .profile-header::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(
-            90deg,
-            rgba(255, 255, 255, 0.3) 1px,
-            transparent 1px
-        ),
-        linear-gradient(rgba(255, 255, 255, 0.3) 1px, transparent 1px);
-    background-size: 30px 30px;
-    pointer-events: none; /* Allow clicking through the pattern layer */
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.3) 1px,
+      transparent 1px
+    ),
+    linear-gradient(rgba(255, 255, 255, 0.3) 1px, transparent 1px);
+  background-size: 30px 30px;
+  pointer-events: none; /* Allow clicking through the pattern layer */
 }
 
 .profile-body,
-.profile-edit-section {
-    transform: translateY(-10rem);
+.datasheet-form {
+  transform: translateY(-10rem);
 }
 
 .profile-pic-container {
-    border: 4px solid rgb(83, 197, 83);
+  border: 4px solid rgb(83, 197, 83);
 }
 .profile-pic-container img {
-    object-fit: cover;
-    aspect-ratio: 5/5;
+  object-fit: cover;
+  aspect-ratio: 5/5;
 }
 
 .check-badge {
-    position: absolute;
-    bottom: 0;
-    right: 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 .edit-section-cover {
-    position: absolute;
-    left: 0;
-    top: 5.1rem;
-    height: 100%;
-    width: 100%;
+  position: absolute;
+  left: 0;
+  top: 5.1rem;
+  height: 100%;
+  width: 100%;
 }
 
 /* PROFILE CARD  */
 
 .profile-card-img {
-    border: 3px solid rgba(147, 14, 195, 0.3);
-    transition: all 0.3s;
+  border: 3px solid rgba(147, 14, 195, 0.3);
+  transition: all 0.3s;
 }
 
 .profile-card:hover .profile-card-img {
-    border-color: rgb(216, 99, 255);
-    transform: scale(108%);
+  border-color: rgb(216, 99, 255);
+  transform: scale(108%);
 }
 
 .profile-card .btns {
-    background-color: rgba(93, 54, 109, 0.02);
+  background-color: rgba(93, 54, 109, 0.02);
 }
 .profile-card .btn:hover {
-    color: var(--clr-primary) !important;
+  color: var(--clr-primary) !important;
 }
 
 .profile-status-bar {
-    background-color: rgba(199, 173, 207, 0.407);
+  background-color: rgba(199, 173, 207, 0.407);
 }
 .profile-status-bar .bar {
-    width: 50%;
-    opacity: 0.7;
-    height: 10px;
-    background-color: var(--clr-primary);
+  width: 50%;
+  opacity: 0.7;
+  height: 10px;
+  background-color: var(--clr-primary);
 }
 
 .course-tab {
-    overflow-x: scroll;
+  overflow-x: scroll;
 }
 
 .course-tab::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
+
+/* DATA SHEET  */
+.datasheet-header {
+  background-color: rgba(147, 14, 195, 0.06);
+}
+
 /* UTILITY CLASSES  */
 
 .text-accent {
-    color: var(--accent) !important;
+  color: var(--accent) !important;
 }
 .txt-primary {
-    color: var(--clr-primary) !important;
+  color: var(--clr-primary) !important;
 }
 
 .btn-primary {
-    background: var(--primary-gradient) !important;
-    border: none !important;
+  background: var(--primary-gradient) !important;
+  border: none !important;
 }
 .cursor {
-    cursor: pointer;
+  cursor: pointer;
 }
 .rounded-4 {
-    border-radius: 24px;
+  border-radius: 24px;
 }
 .fs-7 {
-    font-size: 0.8rem;
+  font-size: 0.8rem;
 }
 .primary-gradient {
-    background: var(--primary-gradient);
+  background: var(--primary-gradient);
 }
 
 .min-h-100 {
-    min-height: 100vh;
+  min-height: 100vh;
 }
 
 .center {
-    align-items: center;
-    justify-content: center;
-    display: flex;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
 .bg-none {
-    background: transparent !important;
+  background: transparent !important;
 }
 
 @media only screen and (min-width: 576px) {
-    .signin-page {
-        background-color: transparent;
-    }
+  .signin-page {
+    background-color: transparent;
+  }
 }
 
 @media only screen and (min-width: 768px) {
-    .profile-header {
-        border-radius: 18px;
-    }
+  .profile-header {
+    border-radius: 18px;
+  }
 }
