@@ -25,6 +25,15 @@ function Profile() {
         queryFn: () => getUserById(id),
     });
 
+    if (!user)
+        return (
+            <div className="container min-h-100 center">
+                <div className="alert alert-danger">
+                    We cannot find this user. This is maybe because they deleted
+                    their account.
+                </div>
+            </div>
+        );
     if (isError) console.log("error fetching user from profile", error);
 
     if (isLoading)

@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { MdOutlineContentCopy } from "react-icons/md";
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
-import { supabase } from "../supabase-client"; // Using your import structure
+import { supabase } from "../supabase-client";
 
 import InputField from "./ui/InputField";
+import { useAuth } from "../context/AuthContext";
 
 export default function DatasheetForm({ userProfile, sessionId }) {
     const [readOnly, setReadOnly] = useState(true);
     const queryClient = useQueryClient();
+    const { signOutUser } = useAuth();
 
     // Initialize form data with nested structure matching your database tables
     const [formData, setFormData] = useState({
@@ -197,6 +199,7 @@ export default function DatasheetForm({ userProfile, sessionId }) {
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["users"] });
+            console.log("Deleted user successfully");
             // Redirect to login or home page after deletion
             // navigate("/login"); // Uncomment and adjust based on your routing setup
         },
@@ -265,13 +268,27 @@ export default function DatasheetForm({ userProfile, sessionId }) {
         }
     };
 
-    const handleDeleteAccount = () => {
+    const handleDeleteAccount = async () => {
         if (
             window.confirm(
                 "Are you sure you want to delete your account? This action cannot be undone."
             )
         ) {
-            deleteUserMutation.mutate();
+            // signOutUser();
+
+            if (!userProfile) return;
+
+            const { error } = await supabase
+                .from("users")
+                .update({ is_deleted: "true" })
+                .eq("user_id", userProfile.user_id);
+
+            if (!error) {
+                deleteUserMutation.mutate();
+                signOutUser();
+            } else {
+                console.error(error);
+            }
         }
     };
 

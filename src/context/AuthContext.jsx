@@ -77,9 +77,6 @@ export const AuthProvider = ({ children }) => {
 
             // If you're storing anything in localStorage, clear it
             localStorage.removeItem("sb-fwwqazzqggebcrkwzcqs-auth-token");
-
-            // Redirect to login page
-            router.push("/"); // Adjust the route as needed
         } catch (error) {
             console.error("There was an error while signing out:", error);
         }
