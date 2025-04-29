@@ -27,7 +27,7 @@ function DashboardOverview() {
     return (
         <div className="row px-2 mb-3">
             <div className="col col-12 col-md-7 mb-2 mb-md-0 px-3">
-                <div className="row row-cols-4 bg-white rounded-4">
+                <div className="row row-cols-4 bg-white shadow-sm rounded-4">
                     <div className="col py-3">
                         <div className="flex-column pe-2 center border-end">
                             <h2 className="mb-0 txt-muted fw-semibold">

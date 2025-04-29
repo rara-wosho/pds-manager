@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import { BsPatchCheckFill } from "react-icons/bs";
 
-import { useParams } from "react-router-dom";
-
 function ProfileCard({ user }) {
     return (
         <div className="profile-card bg-white rounded-4 shadow-sm overflow-hidden">
@@ -28,6 +26,7 @@ function ProfileCard({ user }) {
                     <h5 className="text-center text-dark card-name fs-6">
                         {user?.first_name} {user?.last_name}
                     </h5>
+                    <p className="mb-1 fs-7 text-secondary">{user?.email}</p>
                     <p className="mb-0 text-secondary fs-7">
                         <span className="border-end pe-2">{user?.gender}</span>
                         <span className="border-start text-uppercase fw-semibold ps-2">
@@ -37,7 +36,10 @@ function ProfileCard({ user }) {
                 </div>
             </Link>
             <div className="center border-top btns">
-                <Link className="btn py-2 w-100 rounded-4 text-secondary fw-bold btn-sm">
+                <Link
+                    to={`/profile/${user.user_id}`}
+                    className="btn py-2 w-100 rounded-4 text-secondary fw-bold btn-sm"
+                >
                     View PDS
                 </Link>
             </div>

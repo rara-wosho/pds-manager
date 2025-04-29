@@ -92,7 +92,7 @@ function Signup() {
                         </label>
                         <InputField
                             value={formData.email}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                             name="email"
                             type="email"
                             placeholder="Enter a valid email address"
@@ -103,7 +103,7 @@ function Signup() {
                         <label className="form-label fs-7 mb-1">Password</label>
                         <InputField
                             value={formData.password}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                             name="password"
                             placeholder="Must be at least 6 characters"
                             type="password"
@@ -117,7 +117,7 @@ function Signup() {
                         </label>
                         <InputField
                             value={formData.repeatPassword}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                             name="repeatPassword"
                             placeholder="Re-enter your password"
                             type="password"

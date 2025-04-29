@@ -70,20 +70,13 @@ function Signin() {
                         </div>
                     )}
                     <div className="mb-3">
-                        <label
-                            htmlFor="exampleFormControlInput1"
-                            className="form-label mb-1 fs-7"
-                        >
-                            Email
-                        </label>
-                        <input
+                        <label className="form-label mb-1 fs-7">Email</label>
+                        <InputField
                             required
                             value={formData.email}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                             name="email"
                             type="email"
-                            className="form-control bg-none"
-                            id="exampleFormControlInput1"
                             placeholder="Enter a valid email address"
                         />
                     </div>
@@ -92,7 +85,7 @@ function Signin() {
                         <InputField
                             required
                             value={formData.password}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                             name="password"
                             placeholder="Enter Password"
                             type="password"

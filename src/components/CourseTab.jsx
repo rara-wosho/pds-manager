@@ -10,7 +10,7 @@ export default function CourseTab({ courseFilter, setCourseFilter }) {
                 <div
                     key={course}
                     onClick={() => setCourseFilter(course)}
-                    className={`px-3 btn-sm flex-shrink-0 fs-7 btn text-uppercase ${
+                    className={`px-3 btn-sm flex-shrink-0 fs-7 d-flex btn text-uppercase ${
                         courseFilter === course
                             ? "btn-primary"
                             : "btn-outline-secondary"

@@ -1,10 +1,12 @@
 import { SiGoogletagmanager } from "react-icons/si";
 import { FiLogOut } from "react-icons/fi";
 
+import { Link } from "react-router-dom";
+
 import { useAuth } from "../context/AuthContext";
 
-function Navbar() {
-    const { signOutUser } = useAuth();
+function Navbar({ image_path }) {
+    const { user, signOutUser } = useAuth();
     return (
         <div className="navbar-wrapper bg-white mb-2 mb-md-3 position-fixed top-0 start-0 w-100">
             <div
@@ -22,16 +24,18 @@ function Navbar() {
                 </a>
 
                 <div className="avatar-container d-flex align-items-center ms-auto">
-                    <img
-                        src="https://i.pinimg.com/736x/c7/9a/37/c79a37e13ef14be556b51143bcbb1b01.jpg"
-                        width={35}
-                        height={35}
-                        className="rounded-circle shadow-sm"
-                        alt=""
-                    />
-                    <div className="text-muted fw-semibold mx-2 d-none d-md-inline-block">
-                        Israel De Vera
-                    </div>
+                    <Link to={`/profile/${user.id}`}>
+                        <img
+                            src="/images/default-img.jpg"
+                            width={35}
+                            height={35}
+                            className="rounded-circle shadow-sm"
+                            alt=""
+                        />
+                        <div className="text-muted fw-medium mx-2 d-none d-md-inline-block">
+                            {user?.email}
+                        </div>
+                    </Link>
 
                     <div
                         onClick={signOutUser}

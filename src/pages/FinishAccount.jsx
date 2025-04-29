@@ -20,10 +20,7 @@ function FinishAccount() {
         age: "",
         role: "user",
         gender: "",
-        position: "",
-        address: "",
         course: "",
-        year_section: "",
     });
 
     const handleChange = (e) => {
@@ -91,7 +88,7 @@ function FinishAccount() {
                         <InputField
                             name="first_name"
                             value={formData.first_name}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                             required
                             placeholder="Enter First Name"
                         />
@@ -103,7 +100,7 @@ function FinishAccount() {
                         <InputField
                             name="last_name"
                             value={formData.last_name}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                             required
                             placeholder="Enter Last Name"
                         />
@@ -115,7 +112,7 @@ function FinishAccount() {
                         <InputField
                             name="middle_name"
                             value={formData.middle_name}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                             placeholder="Enter Middle Name"
                         />
                     </div>
@@ -134,8 +131,9 @@ function FinishAccount() {
                         <InputField
                             name="age"
                             value={formData.age}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                             placeholder="Enter Age"
+                            required
                         />
                     </div>
                     <div className="col px-2 mb-3">
@@ -145,65 +143,28 @@ function FinishAccount() {
                             value={formData.gender}
                             onChange={handleChange}
                             className="form-select"
-                            aria-label="Select Gender"
+                            required
                         >
                             <option value="">Select Gender</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </select>
                     </div>
-                    <div className="col px-2 mb-2">
-                        <label className="form-label text-muted">
-                            Position (Org members only)
-                        </label>
-                        <InputField
-                            name="position"
-                            value={formData.position}
-                            onChange={handleChange}
-                            placeholder="e.g., President"
-                        />
-                    </div>
-                    <div className="col px-2 mb-2">
-                        <label className="form-label text-muted">
-                            Full Address
-                        </label>
-                        <InputField
-                            name="address"
-                            value={formData.address}
-                            onChange={handleChange}
-                            placeholder="e.g., Macabayo Jimenez Misamis Occidental"
-                        />
-                    </div>
-                </div>
-
-                <h6 className="text-muted">Academics</h6>
-                <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 px-2">
-                    <div className="col px-2 mb-2">
+                    <div className="col px-2 mb-3">
                         <label className="form-label text-muted">Course</label>
                         <select
                             name="course"
                             value={formData.course}
                             onChange={handleChange}
                             className="form-select"
-                            aria-label="Select Gender"
+                            required
                         >
                             <option value="">Select Course</option>
                             <option value="bsit">BSIT</option>
-                            <option value="btle ia">BTLE IA</option>
                             <option value="btle he">BTLE HE</option>
+                            <option value="btle ia">BTLE IA</option>
                             <option value="bsmb">BSMB</option>
                         </select>
-                    </div>
-                    <div className="col px-2 mb-2">
-                        <label className="form-label text-muted">
-                            Year and Section
-                        </label>
-                        <InputField
-                            name="year_section"
-                            value={formData.year_section}
-                            onChange={handleChange}
-                            placeholder="e.g., 2nd - 2B"
-                        />
                     </div>
                 </div>
 

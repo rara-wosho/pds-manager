@@ -7,8 +7,8 @@ function InputField({
     name = "",
     required,
     value,
-    onChange,
-    disabled,
+    handleChange,
+    readOnly,
 }) {
     const [showPassword, setShowPassword] = useState(false);
 
@@ -27,9 +27,9 @@ function InputField({
                 placeholder={placeholder}
                 required={required}
                 value={value}
-                onChange={onChange}
+                onChange={handleChange}
                 name={name}
-                disabled={disabled}
+                readOnly={readOnly}
             />
             {type === "password" && (
                 <div

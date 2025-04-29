@@ -5,6 +5,7 @@ import DashboardOverview from "../components/DashboardOverview";
 import CourseTab from "../components/CourseTab";
 
 import { useState } from "react";
+import { IoMdRefresh } from "react-icons/io";
 
 function Home() {
     const [courseFilter, setCourseFilter] = useState("all");
@@ -13,12 +14,11 @@ function Home() {
         data: users,
         isLoading,
         isFetching,
+        refetch,
         isPending,
         isError,
         error,
     } = useUsers(courseFilter);
-
-    console.log("User data: ", users);
 
     if (isError)
         return (
@@ -45,19 +45,15 @@ function Home() {
                             setCourseFilter={setCourseFilter}
                         />
                     </div>
-                    <div className="col col-12 col-md-7 d-flex align-items-center mb-3">
-                        <input
-                            placeholder="Search..."
-                            type="text"
-                            className="w-100 border-0 form-control ms-auto"
-                        />
-                        <button className="btn btn-primary btn-sm ms-2">
-                            Search
+                    {/* <div className="col col-12 col-md-7 d-flex align-items-center justify-content-end mb-3">
+                        <button
+                            onClick={refetch}
+                            className="btn btn-primary btn-sm"
+                        >
+                            <IoMdRefresh className="me-1" />
+                            {isFetching ? "Refreshing" : "Refresh"}
                         </button>
-                        <button className="btn btn-outline-danger btn-sm ms-2">
-                            Reset
-                        </button>
-                    </div>
+                    </div> */}
                 </div>
                 {isLoading ? (
                     <div className="p-5 center">
