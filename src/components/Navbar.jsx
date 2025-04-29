@@ -8,7 +8,10 @@ import { useAuth } from "../context/AuthContext";
 function Navbar({ image_path }) {
     const { user, signOutUser } = useAuth();
     return (
-        <div className="navbar-wrapper bg-white mb-2 mb-md-3 position-fixed top-0 start-0 w-100">
+        <div
+            style={{ zIndex: 999 }}
+            className="navbar-wrapper bg-white mb-2 mb-md-3 position-fixed top-0 start-0 w-100 border-bottom"
+        >
             <div
                 style={{ maxWidth: 1100 }}
                 className="py-3 d-flex align-items-center mx-auto px-3"

@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { supabase } from "../supabase-client";
 
 const AuthContext = createContext(null);
@@ -12,6 +11,8 @@ export const AuthProvider = ({ children }) => {
         // Get initial session
         supabase.auth.getSession().then(({ data: { session } }) => {
             setUser(session?.user ?? null);
+
+            console.log("session :", session);
             setLoading(false);
         });
 
@@ -46,14 +47,42 @@ export const AuthProvider = ({ children }) => {
         return { data, error };
     };
 
+    // const signOutUser = async () => {
+    //     const { error } = await supabase.auth.signOut();
+
+    //     if (error) {
+    //         console.error("there was an error while signing out", error);
+    //     }
+
+    //     return error;
+    // };
+
+    // Fixed logout function for Supabase in AuthContext.jsx
     const signOutUser = async () => {
-        const { error } = await supabase.auth.signOut();
+        try {
+            // Get the current session first
+            const { data: session } = await supabase.auth.getSession();
 
-        if (error) {
-            console.error("there was an error while signing out", error);
+            // Only attempt to sign out if there's an active session
+            if (session && session.session) {
+                const { error } = await supabase.auth.signOut();
+
+                if (error) {
+                    console.error("Error during sign out:", error.message);
+                }
+            }
+
+            // Clear user state regardless of whether there was a session
+            setUser(null);
+
+            // If you're storing anything in localStorage, clear it
+            localStorage.removeItem("sb-fwwqazzqggebcrkwzcqs-auth-token");
+
+            // Redirect to login page
+            router.push("/"); // Adjust the route as needed
+        } catch (error) {
+            console.error("There was an error while signing out:", error);
         }
-
-        return error;
     };
 
     // Show loading state while checking authentication
