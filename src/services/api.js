@@ -63,6 +63,18 @@ function UserProfile({ userId }) {
 }
 */
 
-export async function updateUserInfo(user_id, data) {
-    const { error } = await supabase.from("users").insert(data);
+export async function searchUser(searchTerm) {
+    const { data, error } = await supabase
+        .from("users")
+        .select("*")
+        .or(
+            `first_name.ilike.%${searchTerm}%,last_name.ilike.%${searchTerm}%,course.ilike.%${searchTerm}%,email.ilike.%${searchTerm}%`
+        );
+
+    if (error) {
+        console.error("Search error:", error);
+        return [];
+    }
+
+    return data;
 }

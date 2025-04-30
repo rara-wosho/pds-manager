@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { MdOutlineContentCopy } from "react-icons/md";
-import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "../supabase-client";
 
 import InputField from "./ui/InputField";
+
 import { useAuth } from "../context/AuthContext";
 
 export default function DatasheetForm({ userProfile, sessionId }) {
@@ -333,9 +334,7 @@ export default function DatasheetForm({ userProfile, sessionId }) {
             )}
 
             <div className="d-flex flex-column w-100 datasheet-form pt-4 px-3 px-md-0">
-                {readOnly && (
-                    <div className="w-100 h-100 position-absolute"></div>
-                )}
+                {readOnly && <div className="h-100 position-absolute"></div>}
 
                 <Section title="Personal Information">
                     <InputGroup

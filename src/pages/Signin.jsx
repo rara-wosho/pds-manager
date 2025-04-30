@@ -46,7 +46,10 @@ function Signin() {
 
     return (
         <div className="min-h-100 center signin-page flex-column center pt-5">
-            <div className="wrapper signin-wrapper mb-3 p-5 rounded-3 center flex-column position-relative">
+            <div
+                style={{ maxWidth: 450 }}
+                className="signin-wrapper  p-md-5 p-4 rounded-3 center flex-column position-relative w-100"
+            >
                 <div className="icon-wrapper primary-gradient p-3 rounded-circle">
                     <SiGoogletagmanager color="white" size={48} />
                 </div>
@@ -60,9 +63,8 @@ function Signin() {
 
                 <form
                     onSubmit={handleSignIn}
-                    style={{ width: 350 }}
                     action=""
-                    className="mt-4 "
+                    className="mt-4 d-flex flex-column w-100"
                 >
                     {errorMessage && (
                         <div className="alert py-2 alert-danger">

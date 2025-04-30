@@ -62,7 +62,10 @@ function Signup() {
 
     return (
         <div className="min-h-100 center signin-page py-5 w-100">
-            <div className="wrapper signin-wrapper px-5 pb-4 pt-5 rounded-3 center flex-column position-relative">
+            <div
+                className="signin-wrapper px-md-5 px-4 pb-4 pt-5 rounded-3 center flex-column position-relative w-100"
+                style={{ maxWidth: 450 }}
+            >
                 <div className="icon-wrapper primary-gradient p-3 rounded-circle">
                     <SiGoogletagmanager color="white" size={48} />
                 </div>
@@ -74,12 +77,7 @@ function Signup() {
                     Manage Personal Data with Ease.
                 </small>
 
-                <form
-                    onSubmit={handleSubmit}
-                    style={{ width: 350 }}
-                    action=""
-                    className="mt-4"
-                >
+                <form onSubmit={handleSubmit} action="" className="mt-4">
                     {errorMessage && (
                         <div className="alert py-2 alert-danger">
                             <small className="fs-7">{errorMessage}</small>

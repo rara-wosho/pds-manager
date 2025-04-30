@@ -1,5 +1,4 @@
 import AllRoutes from "./routes/AllRoutes";
-import Footer from "./components/Footer";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -13,7 +12,6 @@ function App() {
     return (
         <>
             <AllRoutes />
-            <Footer />
         </>
     );
 }
