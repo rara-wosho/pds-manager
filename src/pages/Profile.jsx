@@ -6,6 +6,7 @@ import { FiHome } from "react-icons/fi";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate, useParams } from "react-router-dom";
 import DatasheetForm from "../components/DatasheetForm";
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import Footer from "../components/Footer";
 import { getUserById } from "../services/api";
 
@@ -50,7 +51,21 @@ function Profile() {
                     className="profile-page align-items-center d-flex w-100 flex-column min-h-100 p-0 p-md-4 mx-auto"
                 >
                     {/* header  */}
-                    <div className="profile-header w-100">
+                    <div className="profile-header w-100 position-relative">
+                        {user?.role === "admin" && (
+                            <div
+                                style={{
+                                    border: "2px solid white",
+                                    left: "50%",
+                                    transform:
+                                        "translateX(-50%) translateY(3rem)",
+                                }}
+                                className="admin-badge center px-3 rounded-pill position-absolute text-white primary-gradient fs-7"
+                            >
+                                <MdOutlineAdminPanelSettings className="me-1" />
+                                ADMIN
+                            </div>
+                        )}
                         <div className="d-flex justify-content-between p-3">
                             <div
                                 onClick={() => navigate(-1)}
