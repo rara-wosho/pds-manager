@@ -1,11 +1,24 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "../supabase-client";
+import { getUserById } from "../services/api";
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [currentUser, setCurrentUser] = useState();
     const [loading, setLoading] = useState(true);
+
+    async function getCurrentUser() {
+        if (user) {
+            const thisUser = await getUserById(user?.id);
+            setCurrentUser(thisUser);
+            console.log("current user from auth : ", thisUser);
+        }
+    }
+    useEffect(() => {
+        getCurrentUser();
+    }, [user]);
 
     useEffect(() => {
         // Get initial session
@@ -95,7 +108,14 @@ export const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider
-            value={{ user, loading, signUpWithEmail, signOutUser, signInUser }}
+            value={{
+                currentUser,
+                user,
+                loading,
+                signUpWithEmail,
+                signOutUser,
+                signInUser,
+            }}
         >
             {children}
         </AuthContext.Provider>

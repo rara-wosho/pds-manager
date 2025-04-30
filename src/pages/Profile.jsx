@@ -98,11 +98,15 @@ function Profile() {
                             {user?.first_name} {user?.middle_name}{" "}
                             {user?.last_name}
                         </h1>
-                        {user?.position && (
-                            <i className="fs-4 text-muted mb-2 text-center">
-                                {user?.position}
-                            </i>
-                        )}
+                        {user?.barangay ||
+                            user?.municipality ||
+                            (user?.province && (
+                                <i className="fs-4 text-muted mb-2 text-center d-flex align-items-center">
+                                    {user?.barangay}
+                                    {user?.municipality}
+                                    {user?.province}
+                                </i>
+                            ))}
 
                         <p className="mb-0 text-secondary text-center">
                             {user?.address && user?.address}

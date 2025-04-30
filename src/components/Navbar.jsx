@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 function Navbar({ image_path }) {
-    const { user, signOutUser } = useAuth();
+    const { user, signOutUser, currentUser } = useAuth();
     return (
         <div
             style={{ zIndex: 999 }}
@@ -35,8 +35,8 @@ function Navbar({ image_path }) {
                             className="rounded-circle shadow-sm"
                             alt=""
                         />
-                        <div className="text-muted fw-medium mx-2 d-none d-md-inline-block">
-                            {user?.email}
+                        <div className="text-muted fw-medium mx-2 d-none d-md-inline-flex align-items-center">
+                            {currentUser?.first_name} {currentUser?.last_name}
                         </div>
                     </Link>
 

@@ -38,7 +38,7 @@ function Signin() {
             setErrorMessage(error.message);
         } else {
             console.log("success signing in", data);
-            navigate("/profile");
+            navigate("/home");
         }
 
         setLoading(false);

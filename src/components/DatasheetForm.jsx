@@ -10,7 +10,7 @@ import { useAuth } from "../context/AuthContext";
 export default function DatasheetForm({ userProfile, sessionId }) {
     const [readOnly, setReadOnly] = useState(true);
     const queryClient = useQueryClient();
-    const { signOutUser } = useAuth();
+    const { signOutUser, currentUser } = useAuth();
 
     // Initialize form data with nested structure matching your database tables
     const [formData, setFormData] = useState({
@@ -295,7 +295,8 @@ export default function DatasheetForm({ userProfile, sessionId }) {
 
     return (
         <>
-            {userProfile.user_id === sessionId && (
+            {(userProfile.user_id === sessionId ||
+                currentUser.role === "admin") && (
                 <div
                     style={{ gap: 8 }}
                     className="d-flex align-items-center justify-content-center datasheet-form w-100 py-4"
@@ -524,99 +525,127 @@ export default function DatasheetForm({ userProfile, sessionId }) {
                     />
                 </Section>
 
-                <Section title="Parents/Guardian" second_title="Father">
-                    <InputGroup
-                        label="Father's Full Name"
-                        name="father_full_name"
-                        value={formData.parents_guardians.father_full_name}
-                        readOnly={readOnly}
-                        handleChange={handleChange}
-                    />
-                    <InputGroup
-                        label="Occupation"
-                        name="father_occupation"
-                        value={formData.parents_guardians.father_occupation}
-                        readOnly={readOnly}
-                        handleChange={handleChange}
-                    />
-                    <InputGroup
-                        label="Contact Number"
-                        name="father_contact_number"
-                        value={formData.parents_guardians.father_contact_number}
-                        readOnly={readOnly}
-                        handleChange={handleChange}
-                    />
-                    <InputGroup
-                        label="Status"
-                        name="father_status"
-                        value={formData.parents_guardians.father_status}
-                        readOnly={readOnly}
-                        handleChange={handleChange}
-                    />
-                </Section>
+                {(userProfile.user_id === sessionId ||
+                    currentUser.role === "admin") && (
+                    <>
+                        <Section title="Parents/Guardian" second_title="Father">
+                            <InputGroup
+                                label="Father's Full Name"
+                                name="father_full_name"
+                                value={
+                                    formData.parents_guardians.father_full_name
+                                }
+                                readOnly={readOnly}
+                                handleChange={handleChange}
+                            />
+                            <InputGroup
+                                label="Occupation"
+                                name="father_occupation"
+                                value={
+                                    formData.parents_guardians.father_occupation
+                                }
+                                readOnly={readOnly}
+                                handleChange={handleChange}
+                            />
+                            <InputGroup
+                                label="Contact Number"
+                                name="father_contact_number"
+                                value={
+                                    formData.parents_guardians
+                                        .father_contact_number
+                                }
+                                readOnly={readOnly}
+                                handleChange={handleChange}
+                            />
+                            <InputGroup
+                                label="Status"
+                                name="father_status"
+                                value={formData.parents_guardians.father_status}
+                                readOnly={readOnly}
+                                handleChange={handleChange}
+                            />
+                        </Section>
 
-                <Section second_title="Mother">
-                    <InputGroup
-                        label="Mother's Full Name"
-                        name="mother_full_name"
-                        value={formData.parents_guardians.mother_full_name}
-                        readOnly={readOnly}
-                        handleChange={handleChange}
-                    />
-                    <InputGroup
-                        label="Occupation"
-                        name="mother_occupation"
-                        value={formData.parents_guardians.mother_occupation}
-                        readOnly={readOnly}
-                        handleChange={handleChange}
-                    />
-                    <InputGroup
-                        label="Contact Number"
-                        name="mother_contact_number"
-                        value={formData.parents_guardians.mother_contact_number}
-                        readOnly={readOnly}
-                        handleChange={handleChange}
-                    />
-                    <InputGroup
-                        label="Status"
-                        name="mother_status"
-                        value={formData.parents_guardians.mother_status}
-                        readOnly={readOnly}
-                        handleChange={handleChange}
-                    />
-                </Section>
-                <Section second_title="Guardian">
-                    <InputGroup
-                        label="Guardian's Full Name"
-                        name="guardian_occupation"
-                        value={formData.parents_guardians.guardian_occupation}
-                        readOnly={readOnly}
-                        handleChange={handleChange}
-                    />
-                    <InputGroup
-                        label="Occupation"
-                        name="guardian_full_name"
-                        value={formData.parents_guardians.guardian_occupation}
-                        readOnly={readOnly}
-                        handleChange={handleChange}
-                    />
-                    <InputGroup
-                        label="Contact Number"
-                        name="guardian_contact_number"
-                        value={
-                            formData.parents_guardians.guardian_contact_number
-                        }
-                        readOnly={readOnly}
-                        handleChange={handleChange}
-                    />
-                    <InputGroup
-                        label="Status"
-                        name="guardian_status"
-                        value={formData.parents_guardians.guardian_status}
-                        readOnly={readOnly}
-                        handleChange={handleChange}
-                    />
-                </Section>
+                        <Section second_title="Mother">
+                            <InputGroup
+                                label="Mother's Full Name"
+                                name="mother_full_name"
+                                value={
+                                    formData.parents_guardians.mother_full_name
+                                }
+                                readOnly={readOnly}
+                                handleChange={handleChange}
+                            />
+                            <InputGroup
+                                label="Occupation"
+                                name="mother_occupation"
+                                value={
+                                    formData.parents_guardians.mother_occupation
+                                }
+                                readOnly={readOnly}
+                                handleChange={handleChange}
+                            />
+                            <InputGroup
+                                label="Contact Number"
+                                name="mother_contact_number"
+                                value={
+                                    formData.parents_guardians
+                                        .mother_contact_number
+                                }
+                                readOnly={readOnly}
+                                handleChange={handleChange}
+                            />
+                            <InputGroup
+                                label="Status"
+                                name="mother_status"
+                                value={formData.parents_guardians.mother_status}
+                                readOnly={readOnly}
+                                handleChange={handleChange}
+                            />
+                        </Section>
+                        <Section second_title="Guardian">
+                            <InputGroup
+                                label="Guardian's Full Name"
+                                name="guardian_occupation"
+                                value={
+                                    formData.parents_guardians
+                                        .guardian_occupation
+                                }
+                                readOnly={readOnly}
+                                handleChange={handleChange}
+                            />
+                            <InputGroup
+                                label="Occupation"
+                                name="guardian_full_name"
+                                value={
+                                    formData.parents_guardians
+                                        .guardian_occupation
+                                }
+                                readOnly={readOnly}
+                                handleChange={handleChange}
+                            />
+                            <InputGroup
+                                label="Contact Number"
+                                name="guardian_contact_number"
+                                value={
+                                    formData.parents_guardians
+                                        .guardian_contact_number
+                                }
+                                readOnly={readOnly}
+                                handleChange={handleChange}
+                            />
+                            <InputGroup
+                                label="Status"
+                                name="guardian_status"
+                                value={
+                                    formData.parents_guardians.guardian_status
+                                }
+                                readOnly={readOnly}
+                                handleChange={handleChange}
+                            />
+                        </Section>
+                    </>
+                )}
             </div>
         </>
     );
