@@ -64,6 +64,8 @@ function Home() {
                             <CourseTab
                                 courseFilter={courseFilter}
                                 setCourseFilter={setCourseFilter}
+                                setSearchTerm={setSearchTerm}
+                                searchTerm={searchTerm}
                             />
                         </div>
                         <div className="col col-12 col-md-7 d-flex align-items-center justify-content-end mb-3">
@@ -97,7 +99,10 @@ function Home() {
                     ) : (
                         <>
                             {searchTerm !== "" ? (
-                                <SearchResults results={results} />
+                                <SearchResults
+                                    results={results}
+                                    searchTerm={searchTerm}
+                                />
                             ) : (
                                 <div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 px-1">
                                     {users?.map((user) => {
