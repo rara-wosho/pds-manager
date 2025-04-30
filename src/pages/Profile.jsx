@@ -47,7 +47,7 @@ function Profile() {
             ) : (
                 <div
                     style={{ maxWidth: 1100 }}
-                    className="profile-page align-items-center d-flex w-100 flex-column min-h-100 p-0 p-md-4"
+                    className="profile-page align-items-center d-flex w-100 flex-column min-h-100 p-0 p-md-4 mx-auto"
                 >
                     {/* header  */}
                     <div className="profile-header w-100">
