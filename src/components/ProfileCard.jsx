@@ -24,7 +24,7 @@ function ProfileCard({ user }) {
                     </div>
 
                     <h5 className="text-center text-dark card-name fs-6">
-                        {user?.first_name} {user?.last_name}
+                        {user?.last_name}, {user?.first_name}
                     </h5>
                     <p className="mb-1 fs-7 text-secondary">{user?.email}</p>
                     <p className="mb-0 text-secondary fs-7">

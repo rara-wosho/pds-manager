@@ -1,5 +1,3 @@
-import { BsPatchCheckFill } from "react-icons/bs";
-
 import { FiLogOut } from "react-icons/fi";
 import { FiHome } from "react-icons/fi";
 
@@ -11,6 +9,7 @@ import Footer from "../components/Footer";
 import { getUserById } from "../services/api";
 
 import { useQuery } from "@tanstack/react-query";
+import Avatar from "../components/Avatar";
 
 function Profile() {
     const { user: sessionId, signOutUser } = useAuth();
@@ -87,25 +86,12 @@ function Profile() {
 
                     {/* body  */}
                     <div className="w-100 position-relative d-flex flex-column align-items-center profile-body px-3">
-                        <div className="profile-pic-container mb-4 rounded-circle p-2 center position-relative">
-                            <img
-                                src={
-                                    user?.image_path
-                                        ? user.image_path
-                                        : "/images/default-img.jpg"
-                                }
-                                className="rounded-circle"
-                                width={165}
-                                height={165}
-                                alt=""
-                            />
-                            <div className="check-badge">
-                                <BsPatchCheckFill
-                                    size={42}
-                                    color="rgb(160, 64, 230)"
-                                />
-                            </div>
-                        </div>
+                        {/* avatar  */}
+                        <Avatar
+                            initialAvatarUrl={user.image_path}
+                            userId={user.user_id}
+                            sessionId={sessionId}
+                        />
                         <p className="text-secondary mb-2 text-center">
                             {user?.email ?? "email not set"}
                         </p>

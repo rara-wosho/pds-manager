@@ -3,11 +3,16 @@ import { supabase } from "../supabase-client";
 
 // Get all users with their related data
 export async function getAllUsers() {
-    const { data, error } = await supabase.from("users").select(`
+    const { data, error } = await supabase
+        .from("users")
+        .select(
+            `
             *,
             addresses(*),
             parents_guardians(*)
-        `);
+        `
+        )
+        .order("last_name", { ascending: true });
 
     if (error) {
         throw new Error(error.message);

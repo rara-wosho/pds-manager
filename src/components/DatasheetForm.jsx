@@ -293,6 +293,15 @@ export default function DatasheetForm({ userProfile, sessionId }) {
         }
     };
 
+    if (!userProfile || !currentUser)
+        return (
+            <div className="container">
+                <div className="alert alert-danger">
+                    Something went wrong. Please try refreshing the website or
+                    check your internet connection.
+                </div>
+            </div>
+        );
     return (
         <>
             {(userProfile.user_id === sessionId ||
