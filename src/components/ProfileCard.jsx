@@ -3,8 +3,8 @@ import { BsPatchCheckFill } from "react-icons/bs";
 
 function ProfileCard({ user }) {
     return (
-        <div className="profile-card bg-white rounded-4 shadow-sm overflow-hidden">
-            <Link to={`/profile/${user.user_id}`}>
+        <Link to={`/profile/${user.user_id}`}>
+            <div className="profile-card bg-white rounded-4 shadow-sm h-100 d-flex flex-column align-items-between">
                 <div className="flex-column center pt-3 pt-md-4 px-3 px-md-4 pb-3">
                     <div className="profile-card-img mb-3 rounded-circle p-1 position-relative">
                         <img
@@ -26,7 +26,9 @@ function ProfileCard({ user }) {
                     <h5 className="text-center text-dark card-name fs-6">
                         {user?.last_name}, {user?.first_name}
                     </h5>
-                    <p className="mb-1 fs-7 text-secondary">{user?.email}</p>
+                    <p className="mb-1 fs-7 text-secondary d-none d-md-inline-block">
+                        {user?.email}
+                    </p>
                     <p className="mb-0 text-secondary fs-7">
                         <span className="border-end pe-2">{user?.gender}</span>
                         <span className="border-start text-uppercase fw-semibold ps-2">
@@ -34,16 +36,14 @@ function ProfileCard({ user }) {
                         </span>
                     </p>
                 </div>
-            </Link>
-            <div className="center border-top btns">
-                <Link
-                    to={`/profile/${user.user_id}`}
-                    className="btn py-2 w-100 rounded-4 text-secondary fw-bold btn-sm"
-                >
-                    View PDS
-                </Link>
+
+                <div className="mt-auto btns border-top">
+                    <div className="btn py-2 w-100 rounded-4 text-secondary fw-bold btn-sm">
+                        View PDS
+                    </div>
+                </div>
             </div>
-        </div>
+        </Link>
     );
 }
 

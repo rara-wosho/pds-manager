@@ -13,7 +13,6 @@ export const AuthProvider = ({ children }) => {
         if (user) {
             const thisUser = await getUserById(user?.id);
             setCurrentUser(thisUser);
-            console.log("current user from auth : ", thisUser);
         }
     }
     useEffect(() => {
@@ -25,7 +24,6 @@ export const AuthProvider = ({ children }) => {
         supabase.auth.getSession().then(({ data: { session } }) => {
             setUser(session?.user ?? null);
 
-            console.log("session :", session);
             setLoading(false);
         });
 

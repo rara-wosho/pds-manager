@@ -5,8 +5,6 @@ import { memo } from "react";
 
 function DashboardOverview() {
     const { data: users, isLoading } = useUsers();
-
-    console.log("dashboard overview rendered");
     // Count users based on their course
     const courseCounts = {
         bsit: 0,

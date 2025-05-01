@@ -139,6 +139,13 @@ input.form-control::placeholder {
     color: var(--clr-primary) !important;
 }
 
+.profile-status .overlay {
+    inset: 0;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(1px);
+    z-index: 100;
+}
 .profile-status-bar {
     background-color: rgba(199, 173, 207, 0.407);
 }

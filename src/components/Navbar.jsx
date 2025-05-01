@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 import { useAuth } from "../context/AuthContext";
 
-function Navbar({ image_path }) {
+function Navbar() {
     const { user, signOutUser, currentUser } = useAuth();
     return (
         <div
@@ -29,10 +29,13 @@ function Navbar({ image_path }) {
                 <div className="avatar-container d-flex align-items-center ms-auto">
                     <Link to={`/profile/${user.id}`}>
                         <img
-                            src="/images/default-img.jpg"
+                            src={
+                                currentUser?.image_path ||
+                                "/images/default-img.jpg"
+                            }
                             width={35}
                             height={35}
-                            className="rounded-circle shadow-sm"
+                            className="rounded-circle shadow-sm border"
                             alt=""
                         />
                         <div className="text-muted fw-medium mx-2 d-none d-md-inline-flex align-items-center">
@@ -42,12 +45,10 @@ function Navbar({ image_path }) {
 
                     <div
                         onClick={signOutUser}
-                        className="btn btn-sm ms-3 fw-semibold btn-outline-danger"
+                        className="btn btn-sm ms-3 fw-semibold btn-outline-danger d-none d-md-inline-flex align-items-center"
                     >
                         <FiLogOut />
-                        <p className="mb-0 ms-1 d-none d-md-inline-block">
-                            Log Out
-                        </p>
+                        <p className="mb-0 ms-1">Log Out</p>
                     </div>
                 </div>
             </div>
